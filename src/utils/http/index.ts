@@ -2,7 +2,7 @@
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
 import type { AxiosResponse } from 'axios';
-import type { RequestOptions, Result } from '../../types/axios';
+import type { RequestOptions, Result } from '@/../types/axios';
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
 import { VAxios } from './Axios';
 import { RequestEnum, ResultEnum, ContentTypeEnum } from '@/enums/httpEnum';
@@ -12,9 +12,9 @@ import { joinTimestamp, formatRequestDate } from './helper';
 
 const globSetting = {
   title: 1,
-  apiUrl: '1',
+  apiUrl: process.env.VUE_APP_SERVER_URL,
   shortName: 1,
-  urlPrefix: '1',
+  urlPrefix: '/api',
   uploadUrl: 1,
 };
 const urlPrefix = globSetting.urlPrefix;
@@ -133,7 +133,7 @@ const transform: AxiosTransform = {
     const token = 123;
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
-      config.headers.token = options.authenticationScheme
+      config.headers.Authorization = options.authenticationScheme
         ? `${options.authenticationScheme} ${token}`
         : token;
     }
@@ -197,7 +197,7 @@ function createAxios(_opt?: Partial<CreateAxiosOptions>) {
         authenticationScheme: '',
         timeout: 10 * 1000,
         // 基础接口地址
-        // baseURL: globSetting.apiUrl,
+        baseURL: globSetting.apiUrl,
 
         headers: { 'Content-Type': ContentTypeEnum.JSON },
         // 如果是form-data格式

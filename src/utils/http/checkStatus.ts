@@ -1,4 +1,4 @@
-import type { ErrorMessageMode } from '../../types/axios';
+import type { ErrorMessageMode } from '@/../types/axios';
 
 export function checkStatus(
   _status: number,

@@ -36,6 +36,7 @@
 
   import {
     iniLogin,
+    iniLogin2,
     roleMenuLists
   } from '@/api/login/login'
   import router from "@/router/index.ts";
@@ -77,7 +78,9 @@
         console.log('3.-组件挂载到页面之后执行-------onMounted')
       })
       const handleLogin = async () => {
-        let data = await iniLogin(state.loginForm)
+        // let data = await iniLogin(state.loginForm)
+        let data2 = await iniLogin2(state.loginForm)
+        console.log(data2)
         if (data.code == 20000) {
           
           store.dispatch(UserActionTypes.ACTION_LOGIN, data.data.token)

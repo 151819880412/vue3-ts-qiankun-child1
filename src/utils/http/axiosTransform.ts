@@ -1,8 +1,8 @@
 /**
- * Data processing class, can be configured according to the project
+ * 数据处理类，可根据项目配置
  */
 import type { AxiosRequestConfig, AxiosResponse } from 'axios';
-import type { RequestOptions, Result } from '@/types/axios';
+import type { RequestOptions, Result } from '@/../types/axios';
 
 export interface CreateAxiosOptions extends AxiosRequestConfig {
   authenticationScheme?: string;
@@ -12,13 +12,13 @@ export interface CreateAxiosOptions extends AxiosRequestConfig {
 
 export abstract class AxiosTransform {
   /**
-   * @description: Process configuration before request
+   * @description: 请求前的流程配置
    * @description: Process configuration before request
    */
   beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => AxiosRequestConfig;
 
   /**
-   * @description: Request successfully processed
+   * @description: 请求已成功处理
    */
   transformRequestHook?: (res: AxiosResponse<Result>, options: RequestOptions) => any;
 

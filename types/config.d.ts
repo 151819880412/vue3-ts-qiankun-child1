@@ -47,50 +47,51 @@ export interface HeaderSetting {
   fixed: boolean;
   show: boolean;
   theme: ThemeEnum;
-  // Turn on full screen
+  // 打开全屏
   showFullScreen: boolean;
-  // Whether to show the lock screen
+  // 是否显示锁屏
   useLockPage: boolean;
-  // Show document button
+  // 显示文档按钮
   showDoc: boolean;
-  // Show message center button
+  // 显示消息中心按钮
   showNotice: boolean;
+  // 显示搜索按钮
   showSearch: boolean;
 }
 
 export interface LocaleSetting {
   showPicker: boolean;
-  // Current language
+  // 当前语言
   locale: LocaleType;
-  // default language
+  // 默认语言
   fallback: LocaleType;
-  // available Locales
+  // 可用地区
   availableLocales: LocaleType[];
 }
 
 export interface TransitionSetting {
-  //  Whether to open the page switching animation
+  //  是否打开页面切换动画
   enable: boolean;
-  // Route basic switching animation
+  // 路由基本切换动画
   basicTransition: RouterTransitionEnum;
-  // Whether to open page switching loading
+  // 是否打开页面切换加载
   openPageLoading: boolean;
-  // Whether to open the top progress bar
+  // 是否打开顶部进度条
   openNProgress: boolean;
 }
 
 export interface ProjectConfig {
-  // Storage location of permission related information
+  // 权限相关信息的存储位置
   permissionCacheType: CacheTypeEnum;
-  // Whether to show the configuration button
+  // 是否显示配置按钮
   showSettingButton: boolean;
-  // Whether to show the theme switch button
+  // 是否显示主题切换按钮
   showDarkModeToggle: boolean;
-  // Configure where the button is displayed
+  // 配置按钮的显示位置
   settingButtonPosition: SettingButtonPositionEnum;
-  // Permission mode
+  // 权限模式
   permissionMode: PermissionModeEnum;
-  // Session timeout processing
+  // 会话超时处理
   sessionTimeoutProcessing: SessionTimeoutProcessingEnum;
   // Website gray mode, open for possible mourning dates
   grayMode: boolean;

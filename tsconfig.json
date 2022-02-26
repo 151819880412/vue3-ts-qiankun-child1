@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "strictFunctionTypes": false,
     "jsx": "preserve",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "allowJs": true,
     "sourceMap": true,
     "esModuleInterop": true,
@@ -21,9 +21,8 @@
     "skipLibCheck": true,
     "paths": {
       // "*":["./node_modules/@types", "./types/*"],
-      // "!/*":["./node_modules/*"],
       "@/*": ["src/*"],
-      "/#/*": ["types/*"]
+      "#/*": ["types/*"]
     }
   },
   "include": [

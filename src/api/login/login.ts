@@ -1,6 +1,9 @@
 import axios from '../axios'
 const BASE = '/api'
 
+import { defHttp } from '@/utils/http/index';
+
+
 export const iniLogin = (obj:object) => axios({
   method: 'POST',
   url: BASE + '/genuine-system/auth/token/get',
@@ -9,6 +12,9 @@ export const iniLogin = (obj:object) => axios({
   }, 
   data:JSON.stringify(obj) 
 })
+
+export const iniLogin2 = (data: object) => defHttp.post<object>({ url:'/genuine-system/auth/token/get', data });
+
 export const querySystemResource = (type:number) => axios({
   method: 'GET',
   url: BASE + `/genuine-system/sysrescfg/cfg/${type}`,
