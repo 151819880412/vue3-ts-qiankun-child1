@@ -1,6 +1,10 @@
 export type ErrorMessageMode = 'none' | 'modal' | 'message' | undefined;
 
 export interface RequestOptions {
+  // 失败重复请求次数
+  retrtyCount?: number;
+  // 失败重复请求时间
+  retrtyDelay?: number;
   // 将请求参数拼接到url
   joinParamsToUrl?: boolean;
   // 格式化请求参数时间

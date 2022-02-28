@@ -5,7 +5,8 @@ import axios from 'axios';
 import qs from 'qs';
 import { AxiosCanceler } from './axiosCancel';
 import { isFunction } from '@/utils/is';
-import { cloneDeep, omit } from 'lodash-es';
+// import { cloneDeep, omit } from 'lodash-es';
+import { omit } from 'lodash-es';
 import { ContentTypeEnum } from '@/enums/httpEnum';
 import { RequestEnum } from '@/enums/httpEnum';
 
@@ -15,11 +16,14 @@ export * from './axiosTransform';
  * @description:  axios module
  */
 export class VAxios {
-  private axiosInstance: AxiosInstance;
-  private readonly options: CreateAxiosOptions;
+  public axiosInstance: AxiosInstance;
+  private options: CreateAxiosOptions;
+  public qqq: Object;
+
 
   constructor(options: CreateAxiosOptions) {
     this.options = options;
+    this.qqq = this;
     this.axiosInstance = axios.create(options);
     this.setupInterceptors();
   }
@@ -83,7 +87,6 @@ export class VAxios {
       const {
         headers: { ignoreCancelToken },
       } = config;
-
       const ignoreCancel =
         ignoreCancelToken !== undefined
           ? ignoreCancelToken
@@ -111,9 +114,12 @@ export class VAxios {
     }, undefined);
 
     // 响应结果拦截器错误捕获
-    responseInterceptorsCatch &&
-      isFunction(responseInterceptorsCatch) &&
-      this.axiosInstance.interceptors.response.use(undefined, responseInterceptorsCatch);
+    this.axiosInstance.interceptors.response.use(undefined, (err) => {
+      if (responseInterceptorsCatch && isFunction(responseInterceptorsCatch)) {
+        err = responseInterceptorsCatch(err);
+      }
+      return err;
+    });
   }
 
   /**
@@ -178,7 +184,6 @@ export class VAxios {
   }
 
   post<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    console.log(config,options)
     return this.request({ ...config, method: 'POST' }, options);
   }
 
@@ -191,12 +196,16 @@ export class VAxios {
   }
 
   request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    let conf: CreateAxiosOptions = cloneDeep(config);
+    // let conf: CreateAxiosOptions = cloneDeep(config);
+    let conf: CreateAxiosOptions = JSON.parse(JSON.stringify(config));
+
     const transform = this.getTransform();
 
     const { requestOptions } = this.options;
 
-    const opt: RequestOptions = Object.assign({}, requestOptions, options);
+
+    const opt: RequestOptions = JSON.parse(JSON.stringify(Object.assign({}, requestOptions, options)));
+    this.options.requestOptions = JSON.parse(JSON.stringify(opt));
 
     const { beforeRequestHook, requestCatchHook, transformRequestHook } = transform || {};
     if (beforeRequestHook && isFunction(beforeRequestHook)) {
