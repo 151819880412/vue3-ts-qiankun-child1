@@ -118,9 +118,9 @@
   // import {
   //   Store
   // } from "vuex";
-  // import {
-  //   useStore
-  // } from "vuex";
+  import {
+    useStore
+  } from "vuex";
   // import loading from "../../store/modules/loading/state";
   // import {
   //   UserActionTypes
@@ -131,6 +131,8 @@
     name: "",
     props: [],
     setup() {
+      const store = useStore();
+      console.log(store)
       // let ctx = getCurrentInstance();
       // console.log(ctx)
       // console.log('1-开始创建组件-setup')
