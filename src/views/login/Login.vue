@@ -5,18 +5,15 @@
         <el-form ref="loginForms" :model="loginForm" class="login-form" status-icon label-width="0">
           <el-form-item prop="userAccount">
             <el-input v-model="loginForm.userAccount" size="small" auto-complete="new-userPwd" :maxlength="18"
-              @keyup.enter.native="handleLogin">
-              <i slot="prefix" class="icon-yonghu" />
+              @keyup.enter="handleLogin">
             </el-input>
           </el-form-item>
           <el-form-item prop="userPwd">
             <el-input type="userPwd" v-model="loginForm.userPwd" size="small" auto-complete="new-userPwd" show-userPwd
-              :maxlength="18" @keyup.enter.native="handleLogin">
-              <i slot="suffix" class="el-icon-view el-input__icon" @click="showPassword" />
-              <i slot="prefix" class="iconfont icon-mima"></i>
+              :maxlength="18" @keyup.enter="handleLogin">
             </el-input>
           </el-form-item>
-          <el-button type="primary" size="small" class="login-submit" @click.native.prevent="handleLogin">
+          <el-button type="primary" size="small" class="login-submit" @click.prevent="handleLogin">
             登录
           </el-button>
         </el-form>
@@ -39,7 +36,9 @@
     iniLogin2,
     roleMenuLists
   } from '@/api/login/login'
-  import {router} from "@/router/index.ts";
+  import {
+    router
+  } from "@/router/index.ts";
   import {
     useStore
   } from 'vuex';
@@ -79,14 +78,15 @@
       const handleLogin = async () => {
         // let data = await iniLogin(state.loginForm)
         let data = await iniLogin2(state.loginForm)
-          store.dispatch(UserActionTypes.ACTION_LOGIN, data.token)
+        console.log(data)
+        store.dispatch(UserActionTypes.ACTION_LOGIN, data.token)
 
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('refreshToken', data.refreshToken);
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('refreshToken', data.refreshToken);
 
-          let roleResData = await roleMenuLists(data.user.userId);
-          localStorage.setItem('getRoutesLists', JSON.stringify(roleResData.data));
-          router.replace('/personnelManagement/departmentInformation');
+        let roleResData = await roleMenuLists(data.user.userId);
+        localStorage.setItem('getRoutesLists', JSON.stringify(roleResData.data));
+        router.replace('/personnelManagement/departmentInformation');
 
       }
       const showPassword = () => {
