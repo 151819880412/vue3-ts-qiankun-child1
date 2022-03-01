@@ -11,7 +11,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      title: 'login',
+    },
   },
   {
     path: '/personnelManagement',

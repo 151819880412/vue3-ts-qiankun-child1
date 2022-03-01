@@ -113,7 +113,6 @@
     toRefs,
     onBeforeMount,
     onMounted,
-    getCurrentInstance,
     defineComponent
   } from "vue";
   // import {
@@ -132,8 +131,8 @@
     name: "",
     props: [],
     setup() {
-      let ctx = getCurrentInstance();
-      console.log(ctx)
+      // let ctx = getCurrentInstance();
+      // console.log(ctx)
       // console.log('1-开始创建组件-setup')
       let page = reactive({
         currentPage: 1,

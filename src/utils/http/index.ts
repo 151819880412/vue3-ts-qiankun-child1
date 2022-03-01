@@ -46,7 +46,6 @@ const transform: AxiosTransform = {
     // 错误的时候返回
 
     const { data } = res;
-    console.log(data);
     // if (!data) {
     //   // 没有返回值
     //   throw new Error('data数据为null');
@@ -137,7 +136,6 @@ const transform: AxiosTransform = {
    */
   requestInterceptors: (config, options) => {
     loadingInstance = ElLoading.service(Store.state.loading);
-    console.log(NProgress);
     NProgress.start();
     // 请求之前处理config
     const token = 123;
@@ -178,7 +176,6 @@ const transform: AxiosTransform = {
    * @description: 响应错误处理
    */
   responseInterceptorsCatch: async (error: any) => {
-    console.log(error);
     loadingInstance.close();
     NProgress.done();
 
@@ -288,7 +285,6 @@ function createAxios(_opt?: Partial<CreateAxiosOptions>) {
   );
 }
 export const defHttp = createAxios();
-console.log(defHttp);
 // other api url
 // export const otherHttp = createAxios({
 //   requestOptions: {
