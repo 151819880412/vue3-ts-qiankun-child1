@@ -31,14 +31,12 @@ export interface ErrorLogInfo {
 }
 
 export interface UserInfo {
-  name: string;
-  avatar: string;
-  desc?: string;
-  homePath?: string;
-  roles: RoleInfo[];
-  // 这两个还未用上
-  buttons: string[];
-  routes: string[];
+  userId: string;
+  // name: string;
+  // avatar: string;
+  // desc?: string;
+  // homePath?: string;
+  // roles: RoleInfo[];
 }
 
 export interface BeforeMiniState {

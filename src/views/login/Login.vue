@@ -22,7 +22,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import {
     reactive,
     toRefs,
@@ -31,14 +31,10 @@
     getCurrentInstance,
   } from 'vue'
 
-  import {
-    iniLogin,
-    iniLogin2,
-    roleMenuLists
-  } from '@/api/login/login'
+  import loginServiceImpl from '@/api/login'
   import {
     router
-  } from "@/router/index.ts";
+  } from "@/router/index";
   import {
     useStore
   } from 'vuex';
@@ -54,13 +50,14 @@
 
       //  获取当前实例
       const ctx = getCurrentInstance()
+      console.log(ctx)
       // console.log('1-开始创建组件-setup')
 
-      const loginForm = reactive({
-        tenantId: 3,
-        userAccount: 'superadmin',
-        userPwd: "oD02CTiX3oUYYLiFOYlsPsM770PDfyID",
-      })
+      // const loginForm = reactive({
+      //   tenantId: 3,
+      //   userAccount: 'superadmin',
+      //   userPwd: "oD02CTiX3oUYYLiFOYlsPsM770PDfyID",
+      // })
       const state = reactive({
         loginForm: {
           tenantId: 3,
@@ -75,16 +72,17 @@
       onMounted(() => {
         // console.log('3.-组件挂载到页面之后执行-------onMounted')
       })
+      
       const handleLogin = async () => {
         // let data = await iniLogin(state.loginForm)
-        let data = await iniLogin2(state.loginForm)
+        let data = await loginServiceImpl.login(state.loginForm)
         console.log(data)
         store.dispatch(UserActionTypes.ACTION_LOGIN, data.token)
 
         localStorage.setItem('token', data.token);
         localStorage.setItem('refreshToken', data.refreshToken);
 
-        let roleResData = await roleMenuLists(data.user.userId);
+        let roleResData = await loginServiceImpl.queryRoleMenuList(data.user.userId);
         localStorage.setItem('getRoutesLists', JSON.stringify(roleResData.data));
         router.replace('/personnelManagement/departmentInformation');
 
