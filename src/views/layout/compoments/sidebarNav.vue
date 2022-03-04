@@ -12,7 +12,7 @@
     reactive,
     toRaw,
   } from 'vue'
-  import DynamicMenu from "@/components/dynamicMenu.vue";
+  import DynamicMenu from "@/components/DynamicMenu.vue";
 
   interface SidebarMenu {}
 

@@ -26,71 +26,12 @@
         <el-table-column align="center" :resizable="true" prop="useStatus" label="状态"></el-table-column>
       </el-table>
 
-      <!-- <el-table :data="tableData" border row-key="id">
-        <el-table-column fixed="left" type="index" label="功能" width="70"></el-table-column>
-        <el-table-column v-for="(item, index) in tableOptions" :key="`col_${index}`" :prop="tableOptions[index].value"
-          :label="tableOptions[index].label">
-          <template slot-scope="scope">
-            <span v-if="tableOptions[index].value == 'deptTypeId'">{{
-              getValue(scope.row.deptTypeId, "deptTypeIdOptions")
-            }}</span>
-            <span v-else-if="tableOptions[index].value == 'useStatus'">{{
-                scope.row.useStatus == 0
-                  ? "启用"
-                  : scope.row.useStatus == 1
-                  ? "禁用"
-                  : scope.row.useStatus == 2
-                  ? scope.row.nextSignType
-                    ? "待审核" + "（" + scope.row.nextSignType + "）"
-                    : "待审核"
-                  : ""
-              }}
-            </span>
-            <span v-else>{{ scope.row[tableOptions[index].value] }}</span>
-          </template>
-        </el-table-column>
-        <el-table-column fixed="right" label="功能" width="220px">
-          <template slot-scope="scope">
-            <el-dropdown trigger="click" style="margin-right:22px">
-              <el-button type="primary">
-                <span>功能</span>
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="toView(scope.row)" >查阅</el-dropdown-item>
-                <el-dropdown-item @click.native="toEditor(scope.row)"
-                  v-if="(scope.row.useStatus==0||(scope.row.useStatus==2&&scope.row.editStatus==3))">
-                  编辑</el-dropdown-item>
-                <el-dropdown-item @click.native="toDelete(scope.row)"
-                  v-if="(scope.row.useStatus==0||(scope.row.useStatus==2&&scope.row.delStatus==5))">
-                  删除</el-dropdown-item>
-                <el-dropdown-item @click.native="toEnable(scope.row)"
-                  v-if="scope.row.useStatus==1">启用</el-dropdown-item>
-                <el-dropdown-item @click.native="toDisable(scope.row)"
-                  v-if="scope.row.useStatus==0">禁用</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-            <el-dropdown trigger="click">
-              <el-button type="primary">
-                <span>审 核</span>
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="toAudit(scope.row)" v-if="scope.row.useStatus==2">审核</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </template>
-        </el-table-column>
-      </el-table> -->
-
       <!-- 分页 -->
       <div class="block">
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
           :current-page="page.currentPage" :page-sizes="[10, 20, 30, 40, 50, 100]" :page-size="page.pageSize"
           layout="total, sizes, prev, pager, next, jumper" :total="page.total"></el-pagination>
       </div>
-
-
 
     </div>
 
@@ -242,5 +183,4 @@
     padding: 10px;
     border-radius: 15px;
   }
-
 </style>

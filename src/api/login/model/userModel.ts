@@ -1,6 +1,7 @@
+import { Result } from '#/axios';
 import { UserInfo } from '#/store';
 
-export interface LoginResultModel{
+export interface LoginResultModel extends Result{
   userId: string | number;
   token: string;
   refreshToken: string;
