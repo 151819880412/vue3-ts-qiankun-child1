@@ -6,7 +6,7 @@ import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
 import { VAxios } from './Axios';
 import { RequestEnum, ResultEnum, ContentTypeEnum } from '@/enums/httpEnum';
 import { isString } from '@/utils/is';
-import { joinTimestamp, formatRequestDate } from './helper';
+import { formatRequestDate } from './helper';
 
 import { ElLoading, ElMessage } from 'element-plus';
 import { ILoadingInstance } from 'element-plus/lib/el-loading/src/loading.type';
@@ -85,7 +85,7 @@ const transform: AxiosTransform = {
 
   // 请求之前处理config
   beforeRequestHook: (config, options) => {
-    const { apiUrl, joinPrefix, joinParamsToUrl, formatDate, joinTime = true, urlPrefix } = options;
+    const { apiUrl, joinPrefix, joinParamsToUrl, formatDate, urlPrefix } = options;
 
     if (joinPrefix) {
       config.url = `${urlPrefix}${config.url}`;
@@ -100,10 +100,10 @@ const transform: AxiosTransform = {
     if (config.method?.toUpperCase() === RequestEnum.GET) {
       if (!isString(params)) {
         // 给 get 请求加上时间戳参数，避免从缓存中拿数据。
-        config.params = Object.assign(params || {}, joinTimestamp(joinTime, false));
+        config.params = Object.assign(params || {});
       } else {
         // 兼容restful风格
-        config.url = config.url + params + `${joinTimestamp(joinTime, true)}`;
+        config.url = config.url + params;
         // 为了同时存在params和query参数，暂时将query参数放入data中
         config.params = data ? data : undefined;
         // config.params = undefined;
@@ -138,12 +138,17 @@ const transform: AxiosTransform = {
     loadingInstance = ElLoading.service(Store.state.loading);
     NProgress.start();
     // 请求之前处理config
-    const token = 123;
+    const token = localStorage.getItem('token');
+    const refreshToken = localStorage.getItem('refreshToken');
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
-      // jwt token
       config.headers.Authorization = options.authenticationScheme
         ? `${options.authenticationScheme} ${token}`
         : token;
+    }
+    if (refreshToken && (config as Recordable)?.requestOptions?.withToken !== false) {
+      config.headers.refreshToken = options.authenticationScheme
+        ? `${options.authenticationScheme} ${refreshToken}`
+        : refreshToken;
     }
     return config;
   },
@@ -182,7 +187,7 @@ const transform: AxiosTransform = {
 
     const response = error.response;
     const { code, message, config } = error || {};
-
+    console.log(config);
     // 超时重新请求
     // 全局的请求次数,请求的间隙
     const [RETRY_COUNT, RETRY_DELAY] = [config.requestOptions?.retrtyCount, config.requestOptions?.retrtyDelay];
@@ -275,11 +280,13 @@ function createAxios(_opt?: Partial<CreateAxiosOptions>) {
         // 接口拼接地址
         urlPrefix: urlPrefix,
         // 是否加入时间戳
-        joinTime: true,
+        joinTime: false,
         // 忽略重复请求
         ignoreCancelToken: true,
         // 是否携带token
         withToken: true,
+        // 是否携带refreshToken
+        withRefreshToken: true,
       },
     }
   );

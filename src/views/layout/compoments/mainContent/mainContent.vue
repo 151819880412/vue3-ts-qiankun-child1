@@ -1,18 +1,15 @@
 <template>
   <div class="main-container">
-    <!-- <TopAside /> -->
-    <!-- <TableCard /> -->
+    <TopAside />
+    <TableCard />
     <Content />
   </div> 
 </template>
 
-<script> 
-  // import TopAside from './topAside'
-  import Content from './content'
-  import TableCard from './tableCard'
-  // import SockJS from "sockjs-client";
-  // import Stomp from "stompjs";
-  import {mapState, mapGetters} from "vuex";
+<script lang="ts">
+  import TopAside from './topAside.vue'
+  import Content from './content.vue'
+  import TableCard from './tableCard.vue'
 
   export default {
     props: {},
@@ -34,7 +31,7 @@
 
     },
     components: {
-      // TopAside,
+      TopAside,
       Content,
       TableCard
     },
@@ -49,7 +46,5 @@
     transition 0.25s ;
     background #F0F2F5 ;
     box-sizing border-box;
-    display: flex;
-    flex-direction: column;
 
 </style>

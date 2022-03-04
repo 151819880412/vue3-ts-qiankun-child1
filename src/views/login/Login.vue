@@ -3,12 +3,13 @@
     <div class="login-border">
       <div class="login-main">
         <el-form ref="loginForms" :model="loginForm" class="login-form" status-icon label-width="0">
-          <el-form-item prop="userAccount">
+          <!-- ElementPlusError:label-width 必须加载 el-form-item 上。否则 ElementPlus 会报错-->
+          <el-form-item prop="userAccount" label-width="0">
             <el-input v-model="loginForm.userAccount" size="small" auto-complete="new-userPwd" :maxlength="18"
               @keyup.enter="handleLogin">
             </el-input>
           </el-form-item>
-          <el-form-item prop="userPwd">
+          <el-form-item prop="userPwd" label-width="0">
             <el-input type="userPwd" v-model="loginForm.userPwd" size="small" auto-complete="new-userPwd" show-userPwd
               :maxlength="18" @keyup.enter="handleLogin">
             </el-input>
@@ -72,7 +73,7 @@
       onMounted(() => {
         // console.log('3.-组件挂载到页面之后执行-------onMounted')
       })
-      
+
       const handleLogin = async () => {
         // let data = await iniLogin(state.loginForm)
         let data = await loginServiceImpl.login(state.loginForm)
@@ -83,7 +84,7 @@
         localStorage.setItem('refreshToken', data.refreshToken);
 
         let roleResData = await loginServiceImpl.queryRoleMenuList(data.user.userId);
-        localStorage.setItem('getRoutesLists', JSON.stringify(roleResData.data));
+        localStorage.setItem('getRoutesLists', JSON.stringify(roleResData));
         router.replace('/personnelManagement/departmentInformation');
 
       }

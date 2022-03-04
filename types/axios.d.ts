@@ -27,6 +27,8 @@ export interface RequestOptions {
   ignoreCancelToken?: boolean;
   // 是否在标头中发送令牌
   withToken?: boolean;
+  // 是否在标头中发送令牌
+  withRefreshToken?: boolean;
 }
 
 export interface Result<T = any> {

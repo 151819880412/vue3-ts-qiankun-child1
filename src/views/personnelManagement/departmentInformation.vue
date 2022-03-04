@@ -243,10 +243,4 @@
     border-radius: 15px;
   }
 
-  .block {
-    height: 100px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
 </style>

@@ -18,12 +18,10 @@ export * from './axiosTransform';
 export class VAxios {
   public axiosInstance: AxiosInstance;
   private options: CreateAxiosOptions;
-  public qqq: Object;
 
 
   constructor(options: CreateAxiosOptions) {
     this.options = options;
-    this.qqq = this;
     this.axiosInstance = axios.create(options);
     this.setupInterceptors();
   }

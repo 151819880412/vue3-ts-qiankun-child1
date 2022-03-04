@@ -1,70 +1,52 @@
 <template>
   <div class="layout">
-    <SidebarNav
-      class="sidebar"
-      :class="{ sidebarSlide: isShowSidder == true }"
-    />
-    <MainContent
-      :class="{ mainSlide: isShowSidder == true }"
-    />
+    <SidebarNav class="sidebar" :class="{ sidebarSlide: isShowSidder == true }" />
+    <MainContent :class="{ mainSlide: isShowSidder == true }" />
   </div>
 </template>
-<script>
-import MainContent from "./compoments/mainContent/mainContent";
-import SidebarNav from "./compoments/sidebarNav";
+<script lang="ts">
+  import MainContent from "./compoments/mainContent/mainContent.vue";
+  import SidebarNav from "./compoments/sidebarNav.vue";
 
-import { mapState, mapGetters } from "vuex";
-
-export default {
-  data() {
-    return {
-      isShowSidder: false
-    };
-  },
-  mounted() {
-  },
-  components: {
-    SidebarNav,
-    MainContent,
-  },
-  computed: {
-    ...mapState({
-      // isShowLeftSidder: state => state.menuCard.isSidderMenuval,
-      // lockScreenPassword: state => state.lockScreen.lockScreenPassword
-    })
-  },
-  watch: {
-    // isShowLeftSidder(newData, oldData) {
-    //   this.isShowSidder = newData;
-    // }
-  }
-};
+  export default {
+    data() {
+      return {
+        isShowSidder: false
+      };
+    },
+    mounted() {},
+    components: {
+      SidebarNav,
+      MainContent,
+    },
+    computed: {},
+    watch: {}
+  };
 </script>
 <style lang="stylus" scoped>
-.layout {
-  height: 100%;
-  z-index: 101;
-}
+  .layout {
+    height: 100%;
+    z-index: 101;
+  }
 
-.sidebar {
-  height: 100%;
-  background: #ccc;
-  -webkit-transition: all 0.25s;
-  transition: all 0.25s;
-  position: fixed;
-  top: 0px;
-  bottom: 0px;
-  left: 0;
-  z-index: 100;
-  overflow-x: hidden;
-}
+  .sidebar {
+    height: 100%;
+    background: #ccc;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0;
+    z-index: 100;
+    overflow-x: hidden;
+  }
 
-.sidebarSlide{
+  .sidebarSlide {
+    width: 77px;
+  }
 
-  width: 77px;
-}
-
-.mainSlide {
-  margin-left: 77px;
-}
+  .mainSlide {
+    margin-left: 77px;
+  }
 </style>
