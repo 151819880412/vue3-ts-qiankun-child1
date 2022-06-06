@@ -52,6 +52,7 @@ module.exports = {
 
   productionSourceMap: false,
   chainWebpack(config) {
+    config.resolve.symlinks(true);
     // set svg-sprite-loader
     config.module
       .rule('svg')

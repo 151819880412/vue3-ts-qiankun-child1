@@ -8,7 +8,7 @@ import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
 import locale from 'element-plus/lib/locale/lang/zh-cn';
 
-import Forms from '@/components/Forms/Forms.vue';
+// import Loading from "@/views/layout/components/Loading/index.js"
 
 import './styles/index.stylus'
 
@@ -28,6 +28,8 @@ const app = createApp(App);
 
 app.use(store)
 // app.use(router)
+// app.use(Loading)
 app.use(ElementPlus,{locale})
-app.component('forms',Forms)
 app.mount('#app');
+
+export default app

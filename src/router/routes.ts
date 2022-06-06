@@ -1,34 +1,28 @@
 
 import { RouteRecordRaw } from 'vue-router';
 
-import Login from '@/views/login/Login.vue';
-
-const Layout = () => import("@/views/layout/index.vue");
-const DepartmentInformation = () => import("@/views/personnelManagement/departmentInformation.vue");
+import AppLayout from '@/views/layout/AppLayout.vue'
+import A from '@/views/A/a.vue'
+import B from '@/views/B/b.vue'
 
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Login',
-    component: Login,
-    meta: {
-      title: 'login',
-    },
-  },
-  {
-    path: '/personnelManagement',
-    name: 'PersonnelManagement',
-    component: Layout,
-    children: [
+    name: 'AppLayout',
+    component: AppLayout,
+    children:[
       {
-        path: '/personnelManagement/departmentInformation',
-        name: '部门信息',
-        components: {
-          default: DepartmentInformation,
-        }
+        path: '/a',
+        name: 'A',
+        component: A,
+      },
+      {
+        path: '/b',
+        name: 'B',
+        component: B,
       },
     ]
-  }
+  },
 ];
 export default routes;
