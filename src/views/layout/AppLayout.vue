@@ -1,31 +1,28 @@
 <!-- src\layout\AppLayout.vue -->
 <template>
-  <el-container>
-    <el-aside width="200px"> Aside </el-aside>
+  <div class="common-layout">
     <el-container>
       <el-header>Header</el-header>
-      <el-main>
-        <router-view />
-        <Loading></Loading>
-      </el-main>
+      <el-container>
+        <el-aside width="200px">Aside</el-aside>
+        <el-container>
+          <el-main
+            >Main
+            <router-view />
+            <Loading></Loading>
+          </el-main>
+          <el-footer>Footer</el-footer>
+        </el-container>
+      </el-container>
     </el-container>
-  </el-container>
+  </div>
 </template>
 
 <script setup lang="ts">
-import loginServiceImpl from "@/api/login/index";
-import Loading from "./components/Loading/Loading.vue"; 
+import Loading from "./components/Loading/Loading.vue";
 // components: {
 //   Loading
-// }, 
-console.log(
-  loginServiceImpl.login({
-    languageState: 0,
-    tenantId: "3",
-    userAccount: "qwe",
-    userPwd: "Nxuw/RYqlx4uqyyI9qSljA==",
-  })
-);
+// },
 </script>
 
 <style scoped lang="stylus">

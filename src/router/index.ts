@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import routes from './routes';
-import type { App } from 'vue';
+// import type { App } from 'vue';
 
-
+ 
 
 // 白名单应该包含基本静态路由
 const WHITE_NAME_LIST: string[] = [];
@@ -33,6 +33,7 @@ export function resetRouter() {
 }
 
 // config router
-export function setupRouter(app: App<Element>) {
+export function setupRouter(app: any) {
+  // export function setupRouter(app: App<Element>) {
   app.use(router);
 }

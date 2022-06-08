@@ -2,10 +2,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { router, setupRouter } from '@/router';
 import { setupRouterGuard } from '@/router/guard';
-import store from './store'
+import store from './store/index'
 
 import ElementPlus from 'element-plus';
-import 'element-plus/lib/theme-chalk/index.css';
+import 'element-plus/theme-chalk/index.css';
 import locale from 'element-plus/lib/locale/lang/zh-cn';
 
 // import Loading from "@/views/layout/components/Loading/index.js"
@@ -17,7 +17,7 @@ import './styles/index.stylus'
 // .mount('#app')
 
 
-const app = createApp(App);
+const app:any = createApp(App);
 
  // Configure routing
  setupRouter(app);
