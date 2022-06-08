@@ -13,10 +13,19 @@
 </template>
 
 <script setup lang="ts">
-import Loading from './components/Loading/Loading.vue'
-  // components: {
-  //   Loading
-  // },
+import loginServiceImpl from "@/api/login/index";
+import Loading from "./components/Loading/Loading.vue"; 
+// components: {
+//   Loading
+// }, 
+console.log(
+  loginServiceImpl.login({
+    languageState: 0,
+    tenantId: "3",
+    userAccount: "qwe",
+    userPwd: "Nxuw/RYqlx4uqyyI9qSljA==",
+  })
+);
 </script>
 
 <style scoped lang="stylus">
