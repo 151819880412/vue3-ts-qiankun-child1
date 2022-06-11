@@ -2,12 +2,10 @@ import { StateType } from '@/@types'
 import { Module } from 'vuex'
 
 const state = {
-  language: 'zhCN',
   lock: true,
   text: 'Loading...',
-  spinner: 'el-icon-loading',
-  background: 'rgba(255, 2555, 255, 0.5)',
-  customClass:'qqqqq',
+  // spinner: 'qqqqq',
+  background: 'rgba(0, 0, 0, 0.7)',
 }
 type LoadingStateType = typeof state
 

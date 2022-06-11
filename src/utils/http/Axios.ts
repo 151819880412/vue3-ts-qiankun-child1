@@ -83,7 +83,7 @@ export class VAxios {
     this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
       // 如果启用了“取消重复请求”，则禁止取消重复请求
       const {
-        headers: { ignoreCancelToken },
+        headers: ignoreCancelToken,
       } = config;
       const ignoreCancel =
         ignoreCancelToken !== undefined

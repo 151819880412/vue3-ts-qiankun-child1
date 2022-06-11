@@ -1,14 +1,12 @@
 import axios, { AxiosRequestConfig, Method } from 'axios';
 import { ElLoading, ElMessage } from 'element-plus';
-import { ILoadingInstance } from 'element-plus/lib/el-loading/src/loading.type';
+import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading';
 import Store from '@/store';
-
-
 
 // 定义接口 
 interface PendingType {
   url?: string;
-  method?: Method;
+  method?: Method|string|undefined;
   params: any;
   data: any;
   cancel: Function;
@@ -22,7 +20,7 @@ const instance = axios.create({
   timeout: 30000,
   responseType: 'json'
 });
-let loadingInstance: ILoadingInstance;
+let loadingInstance: LoadingInstance;
 
 // 移除重复请求
 const removePending = (config: AxiosRequestConfig) => {
@@ -41,10 +39,10 @@ const removePending = (config: AxiosRequestConfig) => {
 
 // 添加请求拦截器
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
-  let token = localStorage.getItem('token');
-  let refreshToken = localStorage.getItem('refreshToken');
-  config.headers['Authorization'] = token;  // token
-  config.headers['refreshToken'] = refreshToken;  // token
+  let token = localStorage.getItem('token')||'';
+  let refreshToken = localStorage.getItem('refreshToken')||'';
+  config.headers!.Authorization = token;  // token  !表示强制解析  类型推断排除null、undefined
+  config.headers!.refreshToken = refreshToken;  // token
   loadingInstance = ElLoading.service(Store.state.loading);
 
   removePending(config);

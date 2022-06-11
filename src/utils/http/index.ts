@@ -9,7 +9,7 @@ import { isString } from '@/utils/is';
 import { formatRequestDate } from './helper';
 
 import { ElLoading, ElMessage } from 'element-plus';
-import { ILoadingInstance } from 'element-plus/lib/el-loading/src/loading.type';
+import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading';;
 import Store from '@/store';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
@@ -23,7 +23,7 @@ const globSetting = {
 };
 const urlPrefix = globSetting.urlPrefix;
 
-let loadingInstance: ILoadingInstance;
+let loadingInstance: LoadingInstance;
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -134,7 +134,7 @@ const transform: AxiosTransform = {
   /**
    * @description: 请求拦截器处理
    */
-  requestInterceptors: (config, options) => {
+  requestInterceptors: (config:any, options) => {
     loadingInstance = ElLoading.service(Store.state.loading);
     NProgress.start();
     // 请求之前处理config
